@@ -13,7 +13,7 @@ pipeline {
         stage('Build docker image'){
             steps{
                 script{
-                    sh 'docker build -t javatechie/devops-integration .'
+                    sh 'docker build -t nikita093/devops-integration .'
                 }
             }
         }
@@ -21,19 +21,19 @@ pipeline {
             steps{
                 script{
                    withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
-                   sh 'docker login -u javatechie -p ${dockerhubpwd}'
+                   sh 'docker login -u nikita093 -p ${dockerhubpwd}'
 
 }
-                   sh 'docker push javatechie/devops-integration'
+                   sh 'docker push nikita093/devops-integration'
                 }
             }
         }
-        stage('Deploy to k8s'){
-            steps{
-                script{
-                    kubernetesDeploy (configs: 'deploymentservice.yaml',kubeconfigId: 'k8sconfigpwd')
-                }
-            }
-        }
+        // stage('Deploy to k8s'){
+        //     steps{
+        //         script{
+        //             kubernetesDeploy (configs: 'deploymentservice.yaml',kubeconfigId: 'k8sconfigpwd')
+        //         }
+        //     }
+        // }
     }
 }
