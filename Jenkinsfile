@@ -13,7 +13,7 @@ pipeline {
         stage('Build docker image'){
             steps{
                 script{
-                    sh 'docker build -t nikita093/docker_images:devops-integration .'
+                    sh 'docker build -t nikita093/devops-integration .'
                 }
             }
         }
